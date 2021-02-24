@@ -1,9 +1,12 @@
 {
-    "website_list": {
+    "websites_and_content_requirements": {
       "https://twitter.com": "title",
-      "https://yle.fi": "title"
+      "https://yle.fi": "title",
+      "https://www.theverge.com": "title",
+      "https://www.facebook.com/login": "title",
+      "https://mvpaderin.com": "title"
     },
-    "variables": {
+    "app_variables": {
       "periodicity": 60
     }
 }
