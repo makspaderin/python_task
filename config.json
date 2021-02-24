@@ -1,0 +1,9 @@
+{
+    "website_list": {
+      "https://twitter.com": "title",
+      "https://yle.fi": "title"
+    },
+    "variables": {
+      "periodicity": 60
+    }
+}

@@ -1,3 +1,3 @@
 # python_task
 
-Install BeatifulSoup, BS4 modules
+Install BeatifulSoup4 and requests modules
