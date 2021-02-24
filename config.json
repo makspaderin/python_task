@@ -4,7 +4,8 @@
       "https://yle.fi": "title",
       "https://www.theverge.com": "title",
       "https://www.facebook.com/login": "title",
-      "https://mvpaderin.com": "title"
+      "https://mvpaderin.com": "title",
+      "https://mvpaderin.me": ["title", "h1"]
     },
     "app_variables": {
       "periodicity": 60

@@ -29,15 +29,17 @@ def request_data():
 def analyze_data(url, tag, response):
     #Initialize html parser
     soup = BeautifulSoup(response.text, 'html.parser')
-    for item in soup.find_all(tag):
-        if tag != 0:
-            logging.info(f'Here is the {tag} tag for {url}: {item.text}')
+    for single_tag in soup.find_all(tag):
+        if single_tag != 0:
+            logging.info(f'Here is the {single_tag.name} tag for {url}: {single_tag.text}')
         else:
-            logging.info(f'Either {tag} is not specified for {url} or attempt to retrieve {tag} tag has failed')
+            logging.info(f'Either {single_tag.name} is not specified for {url} or attempt to retrieve {single_tag.name} tag has failed')
 
 def time_tracker_wrapper():
+    #Get current time at the start of the function
     start_time = datetime.now()
     request_data()
+    #Get current time again after the function has been run, get the elapsed time and pretty print it
     logging.info(f'The response was processed in {str((datetime.now() - start_time).microseconds / 1000)} milliseconds')
     
 
