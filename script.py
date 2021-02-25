@@ -32,7 +32,7 @@ def analyze_data(url, tag, response):
     soup = BeautifulSoup(response.text, 'html.parser')
     #Check for tags on one-by-one basis for each URL provided
     for single_tag in soup.find_all(tag):
-        if single_tag != 0:
+        if single_tag.text is not None:
             logging.info(f'Here is the {single_tag.name} tag for {url}: {single_tag.text}')
         else:
             logging.info(f'Either {single_tag.name} is not specified for {url} or attempt to retrieve {single_tag.name} tag has failed')
