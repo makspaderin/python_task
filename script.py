@@ -5,6 +5,8 @@ import time
 import json
 from datetime import datetime
 from bs4 import BeautifulSoup
+from flask import Flask
+app = Flask(__name__)
 
 #Configure logger to log timestamp in the format of YY-MM-DD h:m:s
 logging.basicConfig(filename='connection_data.log', format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
@@ -44,7 +46,7 @@ def time_tracker_wrapper():
     #Get current time again after the function has been run, get the elapsed time and pretty print it
     logging.info(f'The response was processed in {str((datetime.now() - start_time).microseconds / 1000)} milliseconds')
     
-
+@app.route('/')
 def main():
     while True:
         time_tracker_wrapper()
@@ -52,4 +54,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    #main()
+    app.run(host='localhost',port=8080,debug=True)
