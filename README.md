@@ -21,7 +21,8 @@ How to read log on UNIX systems (Linux, MacOS) or with UNIX terminals emulators 
 
 Possible  outputs:
 
-1. The website is not accessible - ```Attempt to connect to *website url* failed. This website is either not accessible for some reason. No content requirement will be retrieved```
+1. The website is not accessible
+- ```Attempt to connect to *website url* failed. This website is either not accessible for some reason. No content requirement will be retrieved```
 2. The website is accessible but tag is not for some reason (e.g. happens on Twitter with "title"), or the tag is missing:
 - ```Webpage *website url* is accessible```
 -  ```Either title is not specified for https://twitter.com or attempt to retrieve title tag has failed```
