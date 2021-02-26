@@ -3,7 +3,7 @@
 Prerequisites and basic instructions:
 
 1. To run this app, you need ```python3``` installed. It can also theoretically run on older Python versions, but I would not recommend trying that (I believe that .items() is supported only in python3). You will also most likely need ```pip``` or ```pip3``` to install new modules.
-2. Install ```BeatifulSoup4``` and ```requests``` modules via pip or pip3. Those are required dependencies. This is usually done via ```pip install modulename``` or ```pip3 install modulename```
+2. Install ```BeatifulSoup4```,  and ```requests``` modules via pip or pip3. Those are required dependencies. This is usually done via ```pip install modulename``` or ```pip3 install modulename```
 3. Run ```python3  script.py``` from the root directory of a project. I will recommend using ```tail``` command from the last part of the Readme in the second Terminal window, so you will have app running in one window and log will automatically update in the other.
 4. App is basically in endless loop and will run forever, but can be interrupted via simple keyboard interrupt, so you can just Ctrl+C and run command again once you want to test some changes
 
