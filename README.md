@@ -23,9 +23,9 @@ Possible  outputs:
 
 1. The website is not accessible - ```Attempt to connect to *website url* failed. This website is either not accessible for some reason. No content requirement will be retrieved```
 2. The website is accessible but tag is not for some reason (e.g. happens on Twitter with "title"), or the tag is missing:
-(A) ```Webpage *website url* is accessible```
-(B)  ```Either title is not specified for https://twitter.com or attempt to retrieve title tag has failed```
+- ```Webpage *website url* is accessible```
+-  ```Either title is not specified for https://twitter.com or attempt to retrieve title tag has failed```
 3. Both website and tag are accessible
-(A) ```Webpage *website url* is accessible```
-(B) ```Here is the title tag for *website url*: *tag text*```
+- ```Webpage *website url* is accessible```
+- ```Here is the title tag for *website url*: *tag text*```
 4. Independently on cases 1, 2 and 3, it will produce ```The response was processed in *elapsed time* milliseconds```

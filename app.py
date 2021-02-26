@@ -19,7 +19,7 @@ periodicity = data['app_variables']['periodicity']
 
 def request_data():
     #Go through all key-value pairs
-    for url, tag in data['websites_and_content_requirements'].items():
+    for url, tags in data['websites_and_content_requirements'].items():
         try:
             #Send a get request to a server, stop attempt to contact it after 10 seconds
             response = requests.get(url, timeout = 10)
