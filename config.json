@@ -5,7 +5,8 @@
       "https://www.theverge.com": "title",
       "https://www.facebook.com/login": "title",
       "https://mvpaderin.com": "title",
-      "https://mvpaderin.me": ["title", "h1", "h3"]
+      "https://mvpaderin.me": ["title", "h1", "h3"],
+      "https://twitter.com": "title"
     },
     "app_variables": {
       "periodicity": 60

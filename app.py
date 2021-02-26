@@ -32,19 +32,24 @@ def request_data():
 def analyze_data(url, tags, response):
     print(url)
     print(tags)
-    number_of_tags = len(tags)
-    print (number_of_tags)
     #Initialize html parser
     soup = BeautifulSoup(response.text, 'html.parser')
-    #Check for tags on one-by-one basis for each URL provided
-    #soup.find_all(tags)
-    for tag in tags:
-        print(tag)
-        for tag_item in soup.find_all(tag):
-            if tag:
+    if(isinstance(tags, list)):
+        print (len(tags))
+    else:
+        if len(soup.find_all(tags)) > 0:
+            for tag_item in soup.find_all(tags):
+                print("Nice")
                 logging.info(f'Here is the {tag_item.name} tag for {url}: {tag_item.text}')
-            else:
-                logging.info(f'Either {tag_item.name} is not specified for {url} or attempt to retrieve {tag.name} tag has failed')
+        else:
+            logging.info(f'Either {tags} is not specified for {url} or attempt to retrieve {tags} tag has failed')
+    #Check for tags on one-by-one basis for each URL provided
+    #for tag in tags:
+    #    for tag_item in soup.find_all(tag):
+    #        if tag:
+    #            logging.info(f'Here is the {tag_item.name} tag for {url}: {tag_item.text}')
+    #        else:
+    #            logging.info(f'Either {tag_item.name} is not specified for {url} or attempt to retrieve {tag.name} tag has failed')
 
 def time_tracker_wrapper():
     #Get current time at the start of the function
