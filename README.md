@@ -3,7 +3,7 @@
 Prerequisites and basic instructions:
 
 1. To run this app, you need ```python3``` installed. It can also theoretically run on older Python versions, but I would not recommend trying that (I believe that .items() is supported only in python3). You will also most likely need ```pip``` or ```pip3``` to install new modules.
-2. Install ```BeatifulSoup4```,  and ```requests``` modules via pip or pip3. Those are required dependencies. This is usually done via ```pip install modulename``` or ```pip3 install modulename```
+2. Install ```BeatifulSoup4```, ```flask``` and ```requests``` modules via pip or pip3. Those are required dependencies. This is usually done via ```pip install modulename``` or ```pip3 install modulename```
 3. Run ```python3  script.py``` from the root directory of a project. I will recommend using ```tail``` command from the last part of the Readme in the second Terminal window, so you will have app running in one window and log will automatically update in the other.
 4. App is basically in endless loop and will run forever, but can be interrupted via simple keyboard interrupt, so you can just Ctrl+C and run command again once you want to test some changes
 
@@ -18,3 +18,14 @@ How to read log on UNIX systems (Linux, MacOS) or with UNIX terminals emulators 
 
 1. ```tail -f -n *number of lines* connection_data.log``` - it will print the new data once it's in the log file
 2. ```cat connection_data.log``` - it will not print the new data and you will need to rerun this command again
+
+Possible  outputs:
+
+1. The website is not accessible - ```Attempt to connect to *website url* failed. This website is either not accessible for some reason. No content requirement will be retrieved```
+2. The website is accessible but tag is not for some reason (e.g. happens on Twitter with "title"), or the tag is missing:
+(A) ```Webpage *website url* is accessible```
+(B)  ```Either title is not specified for https://twitter.com or attempt to retrieve title tag has failed```
+3. Both website and tag are accessible
+(A) ```Webpage *website url* is accessible```
+(B) ```Here is the title tag for *website url*: *tag text*```
+4. Independently on cases 1, 2 and 3, it will produce ```The response was processed in *elapsed time* milliseconds```
