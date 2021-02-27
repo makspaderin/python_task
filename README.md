@@ -37,3 +37,4 @@ Some justifications:
 1. Why I use both time and datetime? It was easier to implement periodic checking via ```time.sleep()``` and more elegant to implement elapsed time tracker via *timedelta*, which is a part of *datetime*
 2. Why is config file in .json format? I tried both .ini and .json and found json solution to be much more elegant, so I went with it. I also feel like json is more of a "modern solution"
 3. Why I made periodicity variable foolproof? So the app doesn't run into exceptions on invalid values and also could handle "digit strings"
+4. Why I always convert periodicity variable to float? Because float is more precise, and for this sort of task difference in performance is miniscule. Integer can easily be represented as float anyway.

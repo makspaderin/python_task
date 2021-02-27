@@ -49,31 +49,32 @@ def analyze_data(url, tags, soup):
     else:
         logging.info(f'Either {tags} is not specified for {url} or attempt to retrieve {tags} tag has failed')
 
-def time_tracker_wrapper():
+def time_tracker_wrapper(validation_time):
     #Get current time at the start of the function
     start_time = datetime.now()
     #Run the request method which will run 
     request_data()
     #Get current time again after the function has been run, get the elapsed time and pretty print it
-    logging.info(f'The response was processed in {str((datetime.now() - start_time).microseconds / 1000)} milliseconds')
+    logging.info(f'The response was processed in {str((datetime.now() - start_time + validation_time).microseconds / 1000)} milliseconds')
 
-#Helper method to check if periodicity value is valid
-def is_valid(periodicity):
-    #Make sure that periodicity is either a number or a "digit" string
+#Helper method that will check if periodicity value is a number, and if not, if it can be safely converted to number
+def validate(periodicity):
+    #If periodicity is a string, check if it is an string convertible to integer or float, then make it float
     if (isinstance(periodicity, str)):
-        if not (periodicity.isdigit()):
+        if (periodicity.isdigit() or is_float(periodicity)):
+            periodicity = float(periodicity)
+            stop_if_negative(periodicity)
+            return periodicity
+        else:
             print('The value you provided for periodicity variable is invalid: it is neither a digit nor a "digit" string')
             exit()
-        else:
-            periodicity = convert_to_number(periodicity)
+    else:
+        stop_if_negative(periodicity)
+        return periodicity
 
-    is_negative(periodicity)
-
-    return periodicity
-
-#Check that periodicity value isn't zero or negative
-def is_negative(periodicity):
-    if (periodicity <= 0):
+#Method that will stop the app's execution if number is either zero or negative
+def stop_if_negative(number):
+    if (float(periodicity) <= 0):
         print('The value you provided for periodicity variable is invalid: it cannot be neither a negative number nor a zero')
         exit()
 
@@ -84,22 +85,15 @@ def is_float(number):
         return True
     except:
         return False
-
-#Helper method to convert periodicity to number
-def convert_to_number(periodicity):
-    if is_float(periodicity):
-        periodicity = float(periodicity)
-    else:
-        periodicity = int(periodicity)
-
-    return periodicity
     
 @app.route('/')
 def main():
-    new_periodicity = is_valid(periodicity)
+    start_time = datetime.now()
+    validated_periodicity = validate(periodicity)
+    elapsed_validation_time = (datetime.now() - start_time)
     while True:
-        time_tracker_wrapper()
-        time.sleep(new_periodicity)
+        time_tracker_wrapper(elapsed_validation_time)
+        time.sleep(validated_periodicity)
 
 
 if __name__ == '__main__':
