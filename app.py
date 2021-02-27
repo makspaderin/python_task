@@ -12,8 +12,15 @@ app = Flask(__name__)
 logging.basicConfig(filename='connection_data.log', format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
 #Setting up config parser from a json file (config.json)
-with open('config.json') as json_file:
-    data = json.load(json_file)
+try:
+    with open('config.json') as json_file:
+        data = json.load(json_file)
+except json.decoder.JSONDecodeError:
+    print("Config.json is broken. Please fix syntax errors.")
+    exit()
+except FileNotFoundError:
+    print("Config.json is missing. Please get it from GitHub repository or recreate it manually.")
+    exit()
 #Get periodicity value from config.json
 periodicity = data['app_variables']['periodicity']
 

@@ -43,3 +43,4 @@ Quality assurance related things:
 1. Periodicity validation was added so the app will print a clear error message in case of invalid periodicity value. It also will run safely when periodicity is a string but the one that can be converted to float or an integer
 2. Everything regarding validating periodicity can be removed to reduce the execution time. The app will show exception for anything except positive floats and integers in that case, though.
 3. Content requirement provided is supposed to be string, but e.g. integer provided would not break it - but will very likely not find anything either.
+4. If config.json is broken, the app will not run and will print the message with the reason.
