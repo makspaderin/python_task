@@ -1,8 +1,7 @@
-import requests
-import logging
-import datetime
-import time
 import json
+import logging
+import requests
+import time
 from datetime import datetime
 from bs4 import BeautifulSoup
 from flask import Flask
@@ -16,10 +15,10 @@ try:
     with open('config.json') as json_file:
         data = json.load(json_file)
 except json.decoder.JSONDecodeError:
-    print("Config.json is broken. Please fix syntax errors.")
+    print("Config.json is broken. Please fix syntax errors")
     exit()
 except FileNotFoundError:
-    print("Config.json is missing. Please get it from GitHub repository or recreate it manually.")
+    print("Config.json is missing. Please get it from GitHub repository or recreate it manually")
     exit()
 #Get periodicity value from config.json
 periodicity = data['app_variables']['periodicity']
