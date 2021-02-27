@@ -13,7 +13,6 @@ Use of config file (config.json):
 1. You can assign any integer number to ```periodicity``` variable, it reflects how often the whole script is run (in seconds).
 2. You can provide a website (including specific webpage) and desired content requirements (aka tag(s)) to check for within this website. The app will log all the occurances of those tags on the webpage provided.
 3. You can also provide a non-existing website, and it should return a log message, not break the app.
-4. 
 
 How to read log on UNIX systems (Linux, MacOS) or with UNIX terminals emulators for Windows (e.g. Git Bash):
 
@@ -33,12 +32,14 @@ Possible  outputs:
 4. Independently on cases 1, 2 and 3, it will produce ```The response was processed in *elapsed time* milliseconds```
 5. If the periodicity value is invalid, it will immediately stop the app's execution and will print you the reason to the console
 
-Possible optimization of elapsed time:
-1. Everything regarding validating periodicity can be removed. The app will show exception for anything except positive floats and integers in that case, though.
-
 Some justifications:
 
 1. Why I use both time and datetime? It was easier to implement periodic checking via ```time.sleep()``` and more elegant to implement elapsed time tracker via *timedelta*, which is a part of *datetime*
 2. Why is config file in .json format? I tried both .ini and .json and found json solution to be much more elegant, so I went with it. I also feel like json is more of a "modern solution"
 3. Why I made periodicity variable foolproof? So the app doesn't run into exceptions on invalid values and also could handle "digit strings"
 4. Why I always convert periodicity variable to float? Because float is more precise, and for this sort of task difference in performance is miniscule. Integer can easily be represented as float anyway.
+
+Quality assurance related things:
+1. Periodicity validation was added so the app will print a clear error message in case of invalid periodicity value. It also will run safely when periodicity is a string but the one that can be converted to float or an integer
+2. Everything regarding validating periodicity can be removed to reduce the execution time. The app will show exception for anything except positive floats and integers in that case, though.
+3. Content requirement provided is supposed to be string, but e.g. integer provided would not break it - but will very likely not find anything either.
