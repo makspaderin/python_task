@@ -3,6 +3,15 @@ import requests
 import time
 from tcp_latency import measure_latency
 
+class MonitoredUrl:
+
+    def __init__(self, url, latency, status, is_monitored):
+        self.url = url #string
+        self.latency = latency #float
+        self.status = status #boolean
+        self.is_monitored = is_monitored #boolean
+
+
 try:
     with open('config.json') as json_file:
         data = json.load(json_file)
@@ -28,8 +37,10 @@ def output():
     for url, tag in data['websites_and_content_requirements'].items():
         if (get_status(url)):
             latency = measure_latency(host=url, port=80)
+            MonitoredUrl(url, latency, True, True)
             print(f"Server hosting {url} is up, latency to it is {latency}")
         else:
+            MonitoredUrl(url, 0, False, True)
             print(f"Server hosting {url} is down")
 
 def main():
