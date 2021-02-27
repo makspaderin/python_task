@@ -60,17 +60,20 @@ def time_tracker_wrapper(validation_time):
 #Helper method that will check if periodicity value is a number, and if not, if it can be safely converted to number
 def validate(periodicity):
     #If periodicity is a string, check if it is an string convertible to integer or float, then make it float
-    if (isinstance(periodicity, str)):
+    if (isinstance(periodicity, int) or isinstance(periodicity, float)):
+        stop_if_negative(periodicity)
+        return periodicity
+    elif (isinstance(periodicity, str)):
         if (periodicity.isdigit() or is_float(periodicity)):
             periodicity = float(periodicity)
             stop_if_negative(periodicity)
             return periodicity
         else:
-            print('The value you provided for periodicity variable is invalid: it is neither a digit nor a "digit" string')
+            print('The value you provided for periodicity variable is invalid: it is a string that cannot be represented as a number')
             exit()
     else:
-        stop_if_negative(periodicity)
-        return periodicity
+        print('The value you provided for periodicity variable is invalid: it can be only a number or a string that can be represented as a number')
+        exit()
 
 #Method that will stop the app's execution if number is either zero or negative
 def stop_if_negative(number):

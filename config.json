@@ -9,6 +9,6 @@
       "https://twitter.com": "title"
     },
     "app_variables": {
-      "periodicity": 5
+      "periodicity": "5"
     }
 }

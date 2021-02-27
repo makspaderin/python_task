@@ -13,6 +13,7 @@ Use of config file (config.json):
 1. You can assign any integer number to ```periodicity``` variable, it reflects how often the whole script is run (in seconds).
 2. You can provide a website (including specific webpage) and desired content requirements (aka tag(s)) to check for within this website. The app will log all the occurances of those tags on the webpage provided.
 3. You can also provide a non-existing website, and it should return a log message, not break the app.
+4. 
 
 How to read log on UNIX systems (Linux, MacOS) or with UNIX terminals emulators for Windows (e.g. Git Bash):
 
@@ -31,6 +32,9 @@ Possible  outputs:
 - ```Here is the title tag for *website url*: *tag text*```
 4. Independently on cases 1, 2 and 3, it will produce ```The response was processed in *elapsed time* milliseconds```
 5. If the periodicity value is invalid, it will immediately stop the app's execution and will print you the reason to the console
+
+Possible optimization of elapsed time:
+1. Everything regarding validating periodicity can be removed. The app will show exception for anything except positive floats and integers in that case, though.
 
 Some justifications:
 
