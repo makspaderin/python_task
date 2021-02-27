@@ -56,12 +56,50 @@ def time_tracker_wrapper():
     request_data()
     #Get current time again after the function has been run, get the elapsed time and pretty print it
     logging.info(f'The response was processed in {str((datetime.now() - start_time).microseconds / 1000)} milliseconds')
+
+#Helper method to check if periodicity value is valid
+def is_valid(periodicity):
+    #Make sure that periodicity is either a number or a "digit" string
+    if (isinstance(periodicity, str)):
+        if not (periodicity.isdigit()):
+            print('The value you provided for periodicity variable is invalid: it is neither a digit nor a "digit" string')
+            exit()
+        else:
+            periodicity = convert_to_number(periodicity)
+
+    is_negative(periodicity)
+
+    return periodicity
+
+#Check that periodicity value isn't zero or negative
+def is_negative(periodicity):
+    if (periodicity <= 0):
+        print('The value you provided for periodicity variable is invalid: it cannot be neither a negative number nor a zero')
+        exit()
+
+#Helper method to check if number is a float
+def is_float(number):
+    try:
+        float(number)
+        return True
+    except:
+        return False
+
+#Helper method to convert periodicity to number
+def convert_to_number(periodicity):
+    if is_float(periodicity):
+        periodicity = float(periodicity)
+    else:
+        periodicity = int(periodicity)
+
+    return periodicity
     
 @app.route('/')
 def main():
+    new_periodicity = is_valid(periodicity)
     while True:
         time_tracker_wrapper()
-        time.sleep(periodicity)
+        time.sleep(new_periodicity)
 
 
 if __name__ == '__main__':
