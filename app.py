@@ -4,7 +4,7 @@ import requests
 import time
 from datetime import datetime
 from bs4 import BeautifulSoup
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 
 #Configure logger to log timestamp in the format of YY-MM-DD h:m:s
@@ -62,6 +62,7 @@ def time_tracker_wrapper(validation_time):
     request_data()
     #Get current time again after the function has been run, get the elapsed time and pretty print it
     logging.info(f'The response was processed in {str((datetime.now() - start_time + validation_time).microseconds / 1000)} milliseconds')
+    return (datetime.now() - start_time + validation_time).microseconds / 1000
 
 #Helper method that will check if periodicity value is a number, and if not, if it can be safely converted to number
 def validate(periodicity):
@@ -94,17 +95,50 @@ def is_float(number):
         return True
     except:
         return False
-    
+
+def set_key(dictionary, key, value):
+    if key not in dictionary:
+        dictionary[key] = value
+    elif type(dictionary[key]) == list:
+        dictionary[key].append(value)
+    else:
+        dictionary[key] = [dictionary[key], value]
+
 @app.route('/')
+def flask_handler():
+    dict = {}
+    for url, tags in data['websites_and_content_requirements'].items():
+        try:
+            response = requests.get(url, timeout = 10)
+            if response.ok:
+                soup = BeautifulSoup(response.text, 'html.parser')
+                if(isinstance(tags, list)):
+                    for tag in tags:
+                        if len(soup.find_all(tag)) > 0:
+                            for tag_item in soup.find_all(tag):
+                                set_key(dict, url, str(tag_item.text) + ' (' + str(tag) + ')')
+                        else:
+                            set_key(dict, url, 'tag ' + str(tag) + ' does not exist for ' + str(url))
+                else:
+                    if len(soup.find_all(tags)) > 0:
+                        for tag_item in soup.find_all(tags):
+                            set_key(dict, url, str(tag_item.text) + ' (' + str(tags) + ')')
+                    else:
+                        set_key(dict, url, 'tag ' + str(tags) + ' does not exist for ' + str(url))
+        except requests.exceptions.ConnectionError:
+            set_key(dict, url, 'Website not available')
+    return render_template('index.html', dict = dict.items())
+    
 def main():
     start_time = datetime.now()
     validated_periodicity = validate(periodicity)
     elapsed_validation_time = (datetime.now() - start_time)
     while True:
         time_tracker_wrapper(elapsed_validation_time)
+        flask_handler()
         time.sleep(validated_periodicity)
 
 
 if __name__ == '__main__':
-    main()
-    #app.run()
+    #3main()
+    app.run()

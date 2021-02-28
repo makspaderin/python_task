@@ -7,6 +7,7 @@ Prerequisites and basic instructions:
 3. Run ```python3  script.py``` from the root directory of a project. I will recommend using ```tail``` command (check the third part of this Readme) from the last part of the Readme in the second Terminal window, so you will have app running in one window and log will automatically update in the other.
 4. App is basically in endless loop and will run forever, but can be interrupted via simple keyboard interrupt, so you can just Ctrl+C and run command again once you want to test some changes
 5. Log is not self-cleaning and will contain all output from previous script launches, but you can just delete the logfile and app will recreate it in empty state on next launch.
+6. Flask can be run via ```python3 -m flask run --host=0.0.0.0 --port=5000``` and then visiting *your computer's private IP address*:5000. You can find out your computer's private IP address via ```ifconfig``` on Unix systems and ```ipconfig``` on Windows.
 
 Use of config file (config.json):
 
